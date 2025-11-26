@@ -23,18 +23,23 @@ I18N_ES=$(I18N_DIR)/es.json
 # Installation prefix (can be overridden):
 PREFIX ?= /usr/local
 
+# Optional staging directory for package maintainers (DESTDIR="/tmp/package-root")
+DESTDIR ?=
+
+
 install: build
-	@echo "Installing $(BINARY_NAME) to $(PREFIX)/bin"
-	cp -f $(BINARY_NAME) $(PREFIX)/bin/
-	@echo "Installing manpage to $(PREFIX)/share/man/man1"
-	mkdir -p $(PREFIX)/share/man/man1
-	cp -f man/man1/i18n-manager.1 $(PREFIX)/share/man/man1/
+	@echo "Installing $(BINARY_NAME) to $(DESTDIR)$(PREFIX)/bin"
+	@mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp -f $(BINARY_NAME) $(DESTDIR)$(PREFIX)/bin/
+	@echo "Installing manpage to $(DESTDIR)$(PREFIX)/share/man/man1"
+	@mkdir -p $(DESTDIR)$(PREFIX)/share/man/man1
+	cp -f man/man1/i18n-manager.1 $(DESTDIR)$(PREFIX)/share/man/man1/
 	@echo "Install complete."
 
 uninstall:
-	@echo "Removing $(PREFIX)/bin/i18n-manager and manpage"
-	rm -f $(PREFIX)/bin/i18n-manager
-	rm -f $(PREFIX)/share/man/man1/i18n-manager.1
+	@echo "Removing $(DESTDIR)$(PREFIX)/bin/i18n-manager and manpage"
+	rm -f $(DESTDIR)$(PREFIX)/bin/i18n-manager
+	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/i18n-manager.1
 	@echo "Uninstall complete."
 
 help:
