@@ -1,0 +1,27 @@
+{
+  "common": {
+    "greeting": {
+      "hello": "Hello",
+      "welcome": "Welcome"
+    },
+    "button": {
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "errors": {
+    "network": {
+      "timeout": "Request timed out",
+      "offline": "You are offline"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "user": {
+    "profile": {
+      "name": "Name",
+      "age": "Age"
+    }
+  }
+}

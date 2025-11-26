@@ -1,0 +1,27 @@
+{
+  "common": {
+    "greeting": {
+      "hello": "Hallo",
+      "welcome": "Willkommen"
+    },
+    "button": {
+      "save": "Speichern",
+      "cancel": "Abbrechen"
+    }
+  },
+  "errors": {
+    "network": {
+      "timeout": "Anforderung abgelaufen",
+      "offline": "Sie sind offline"
+    }
+  },
+  "dashboard": {
+    "title": "Instrumententafel"
+  },
+  "user": {
+    "profile": {
+      "name": "Name",
+      "age": "Alter"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "common": {
+    "greeting": {
+      "hello": "Bonjour",
+      "welcome": "Bienvenue"
+    },
+    "button": {
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    }
+  },
+  "errors": {
+    "network": {
+      "timeout": "Délai d'attente dépassé",
+      "offline": "Vous êtes hors ligne"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord"
+  },
+  "user": {
+    "profile": {
+      "name": "Nom",
+      "age": "Âge"
+    }
+  }
+}

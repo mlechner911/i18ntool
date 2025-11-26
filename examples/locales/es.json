@@ -1,0 +1,27 @@
+{
+  "common": {
+    "greeting": {
+      "hello": "Hola",
+      "welcome": "Bienvenido"
+    },
+    "button": {
+      "save": "Guardar",
+      "cancel": "Cancelar"
+    }
+  },
+  "errors": {
+    "network": {
+      "timeout": "Solicitud agotada",
+      "offline": "Estás desconectado"
+    }
+  },
+  "dashboard": {
+    "title": "Tablero"
+  },
+  "user": {
+    "profile": {
+      "name": "Nombre",
+      "age": "Edad"
+    }
+  }
+}
