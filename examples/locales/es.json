@@ -27,9 +27,8 @@
 
   "simple.output_prefix": "",
 
-  "unknown": "<desconocido>"
-}
-{
+  "unknown": "<desconocido>",
+
   "common": {
     "button": {
       "cancel": "Cancelar",
