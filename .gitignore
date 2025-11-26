@@ -1,0 +1,65 @@
+# Binaries for programs and plugins
+/**/*.exe
+/**/*.dll
+/**/*.so
+/**/*.dylib
+
+# Test binary, build artifacts
+/bin/
+/*.exe
+/*.test
+
+# Output of the go coverage tool
+*.out
+
+# Vendor
+/vendor/
+
+# Go workspace file
+go.work
+
+# Dependency directories
+/Godeps/
+
+# IDE/editor directories
+.idea/
+.vscode/
+.DS_Store
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Node modules (if scanning frontend)
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Backup files and editor swap/temp files
+*~
+*.swp
+*.swo
+*.bak
+*.backup.*
+
+# Logs
+.log
+
+# Example local backup files created by the tool
+/examples/locales/*.backup.*
+
+# Local built binary
+/i18n-manager
