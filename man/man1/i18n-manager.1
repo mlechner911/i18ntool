@@ -29,4 +29,30 @@ Load a single translation JSON file and print a key's value.
 Michael Lechner
 .SH COPYRIGHT
 Copyright 2025 Michael Lechner
+
+.SH EXAMPLES
+.SS Adding a translation key
+.TP
+.B i18n-manager add examples/locales/en.json some.section.key "Hello world"
+Adds the key `some.section.key` with value `Hello world` to `en.json` (creates a backup).
+
+.SS Checking for missing translations
+.TP
+.B i18n-manager check examples/locales/en.json examples/locales/de.json
+Reports keys that are present in one file but missing or null in others.
+
+.SS Sorting and saving JSON files
+.TP
+.B i18n-manager sort examples/locales/en.json examples/locales/de.json
+Sorts JSON keys in the provided files and creates backups.
+
+.SS Finding unused keys
+.TP
+.B i18n-manager unused examples/locales/en.json examples/locales/de.json -- ./frontend/src
+Searches project source for references to translation keys and lists keys that appear unused.
+
+.SS Simple lookup
+.TP
+.B i18n-manager simple examples/locales/en.json messages.welcome "[MISSING]"
+Prints the value for `messages.welcome` from `en.json`, or the fallback if not found.
 *** End Patch
