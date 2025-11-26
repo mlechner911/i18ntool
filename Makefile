@@ -1,4 +1,4 @@
-.PHONY: build clean test test-check test-sort test-unused help precheckin
+.PHONY: build clean test test-check test-sort test-unused help precheckin examples-test examples-clean
 
 # Absolute paths (can be overridden). Default to repository root.
 BASE_DIR ?= $(CURDIR)
@@ -22,6 +22,8 @@ help:
 	@echo "  make test-check   - Test missing translations check"
 	@echo "  make test-sort    - Test JSON sorting"
 	@echo "  make test-unused  - Test unused keys detection"
+	@echo "  make examples-test - Run example tests (examples/locales)"
+	@echo "  make examples-clean - Remove backups from examples/locales"
 	@echo "  make precheckin   - Sort, check and validate real i18n files"
 	@echo "  make clean        - Remove binary and backup files"
 
@@ -63,3 +65,12 @@ clean:
 	rm -f $(BINARY_NAME)
 	rm -f $(TEST_DIR)/*.backup.*
 	@echo "Clean complete!"
+
+examples-test: build
+	@echo "Running example tests (examples/locales)"
+	./scripts/run_examples_tests.sh
+
+examples-clean:
+	@echo "Removing backup files from examples/locales"
+	rm -f $(TOOLS_DIR)/examples/locales/*.backup.*
+	@echo "examples/locales cleaned"
