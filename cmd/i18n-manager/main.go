@@ -92,16 +92,12 @@ func main() {
         }
 
     case "sort":
-        if len(os.Args) < 5 {
-            fmt.Println("Usage: i18n-manager sort <en.json> <de.json> <es.json>")
+        if len(os.Args) < 3 {
+            fmt.Println("Usage: i18n-manager sort <file1.json> <file2.json> [...]")
             os.Exit(1)
         }
 
-        files := map[string]string{
-            "en": os.Args[2],
-            "de": os.Args[3],
-            "es": os.Args[4],
-        }
+        files := buildFilesMapFromPaths(os.Args[2:])
 
         tm, err := app.NewTranslationManager(files)
         if err != nil {
@@ -115,18 +111,35 @@ func main() {
         }
 
     case "unused":
-        if len(os.Args) < 6 {
-            fmt.Println("Usage: i18n-manager unused <en.json> <de.json> <es.json> <project-path>...")
+        // Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [<project-path>...]
+        if len(os.Args) < 4 {
+            fmt.Println("Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [...]")
             os.Exit(1)
         }
 
-        files := map[string]string{
-            "en": os.Args[2],
-            "de": os.Args[3],
-            "es": os.Args[4],
+        // find separator `--`
+        sep := -1
+        for i, a := range os.Args[2:] {
+            if a == "--" {
+                sep = i + 2
+                break
+            }
         }
 
-        projectPaths := os.Args[5:]
+        if sep == -1 {
+            fmt.Println("Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [...]")
+            os.Exit(1)
+        }
+
+        fileArgs := os.Args[2:sep]
+        projectPaths := os.Args[sep+1:]
+
+        if len(fileArgs) == 0 || len(projectPaths) == 0 {
+            fmt.Println("Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [...]")
+            os.Exit(1)
+        }
+
+        files := buildFilesMapFromPaths(fileArgs)
 
         tm, err := app.NewTranslationManager(files)
         if err != nil {
@@ -170,4 +183,47 @@ func main() {
         fmt.Fprintf(os.Stderr, "Unknown command: %s\n", command)
         os.Exit(1)
     }
+}
+
+// buildFilesMapFromPaths accepts a slice of paths to JSON files and returns a map
+// of language -> path. It uses the same tolerant detection rules used in the
+// check command (2-letter codes, parent dir, basename, fallback to file-<n>).
+func buildFilesMapFromPaths(paths []string) map[string]string {
+    files := make(map[string]string)
+    used := make(map[string]bool)
+    langRe := regexp.MustCompile(`^[A-Za-z]{2}([_-][A-Za-z]{2})?$`)
+
+    for idx, p := range paths {
+        base := filepath.Base(p)
+        name := strings.TrimSuffix(base, filepath.Ext(base))
+
+        var lang string
+        if langRe.MatchString(name) {
+            lang = name
+        } else {
+            parent := filepath.Base(filepath.Dir(p))
+            if langRe.MatchString(parent) {
+                lang = parent
+            }
+        }
+
+        if lang == "" {
+            if name != "" {
+                lang = name
+            } else {
+                lang = fmt.Sprintf("file-%d", idx+1)
+            }
+        }
+
+        orig := lang
+        i := 1
+        for used[lang] {
+            lang = fmt.Sprintf("%s-%d", orig, i)
+            i++
+        }
+        used[lang] = true
+        files[lang] = p
+    }
+
+    return files
 }
