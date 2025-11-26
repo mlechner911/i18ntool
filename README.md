@@ -159,4 +159,4 @@ python3 scripts/embed_locales_to_go.py
 ```
 
 
-If you want a different language-detection policy (strict two-letter codes, directory-only, or explicit `lang:filepath` syntax), I can add flags or stricter validation.
+Most docs and the man pages are AI generated.
