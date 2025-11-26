@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
 
 	"github.com/mlechner911/i18ntool/internal/app"
 )
@@ -17,15 +20,52 @@ func main() {
 
     switch command {
     case "check":
-        if len(os.Args) < 5 {
-            fmt.Println("Usage: i18n-manager check <en.json> <de.json> <es.json>")
+        if len(os.Args) < 3 {
+            fmt.Println("Usage: i18n-manager check <file1.json> <file2.json> [...]")
             os.Exit(1)
         }
 
-        files := map[string]string{
-            "en": os.Args[2],
-            "de": os.Args[3],
-            "es": os.Args[4],
+        // Accept N json files. Try to derive language code from filename (e.g. "de.json")
+        // or from a parent directory name (e.g. "locales/de/en.json"). If detection
+        // fails, fall back to a safe identifier (basename or fileN). Language detection
+        // is only for reporting, so failures are NOT fatal.
+        files := make(map[string]string)
+        used := make(map[string]bool)
+        langRe := regexp.MustCompile(`^[A-Za-z]{2}([_-][A-Za-z]{2})?$`)
+
+        for idx, p := range os.Args[2:] {
+            base := filepath.Base(p)
+            name := strings.TrimSuffix(base, filepath.Ext(base))
+
+            var lang string
+            if langRe.MatchString(name) {
+                lang = name
+            } else {
+                // check parent directory
+                parent := filepath.Base(filepath.Dir(p))
+                if langRe.MatchString(parent) {
+                    lang = parent
+                }
+            }
+
+            if lang == "" {
+                // fallback to basename if useful, otherwise file-<n>
+                if name != "" {
+                    lang = name
+                } else {
+                    lang = fmt.Sprintf("file-%d", idx+1)
+                }
+            }
+
+            // ensure uniqueness using hyphen suffixes
+            orig := lang
+            i := 1
+            for used[lang] {
+                lang = fmt.Sprintf("%s-%d", orig, i)
+                i++
+            }
+            used[lang] = true
+            files[lang] = p
         }
 
         tm, err := app.NewTranslationManager(files)
