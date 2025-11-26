@@ -20,6 +20,23 @@ I18N_EN=$(I18N_DIR)/en.json
 I18N_DE=$(I18N_DIR)/de.json
 I18N_ES=$(I18N_DIR)/es.json
 
+# Installation prefix (can be overridden):
+PREFIX ?= /usr/local
+
+install: build
+	@echo "Installing $(BINARY_NAME) to $(PREFIX)/bin"
+	cp -f $(BINARY_NAME) $(PREFIX)/bin/
+	@echo "Installing manpage to $(PREFIX)/share/man/man1"
+	mkdir -p $(PREFIX)/share/man/man1
+	cp -f man/man1/i18n-manager.1 $(PREFIX)/share/man/man1/
+	@echo "Install complete."
+
+uninstall:
+	@echo "Removing $(PREFIX)/bin/i18n-manager and manpage"
+	rm -f $(PREFIX)/bin/i18n-manager
+	rm -f $(PREFIX)/share/man/man1/i18n-manager.1
+	@echo "Uninstall complete."
+
 help:
 	@echo "Available targets:"
 	@echo "  make build        - Build the Go binary"
