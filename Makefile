@@ -62,6 +62,10 @@ help:
 	@echo "  make test-unused  - Test unused keys detection"
 	@echo "  make examples-test - Run example tests (examples/locales)"
 	@echo "  make examples-clean - Remove backups from examples/locales"
+	@echo "  make embed-locales - Regenerate embedded translations Go source"
+	@echo "  make install       - Install binary and manpage to \\$(PREFIX) (use DESTDIR for staging)"
+	@echo "  make uninstall     - Remove installed binary and manpage"
+	@echo "  make package       - Create a staged tarball under dist/"
 	@echo "  make precheckin   - Sort, check and validate real i18n files"
 	@echo "  make clean        - Remove binary and backup files"
 
