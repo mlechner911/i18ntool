@@ -1,0 +1,18 @@
+{
+  "app": {
+    "title": "i18n Manager",
+    "menu": {
+      "home": "Startseite",
+      "settings": "Einstellungen",
+      "help": "Hilfe"
+    }
+  },
+  "messages": {
+    "welcome": "Willkommen beim i18n Manager",
+    "goodbye": "Auf Wiedersehen"
+  },
+  "errors": {
+    "notfound": "Ressource nicht gefunden",
+    "unauthorized": "Nicht autorisiert"
+  }
+}
