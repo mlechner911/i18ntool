@@ -4,6 +4,14 @@ Copyright: 2025
 
 Lightweight CLI for managing JSON translation files: checking missing translations, sorting and backing up, adding keys, and detecting unused keys.
 
+Motivation
+-----
+I'm constantly updating translations for a new project and frequently run into
+missing or obsolete keys. This tool helps identify unused keys and missing
+translations, and automates much of the routine translation work.
+
+I plan to add a lightweight wrapper so it can be integrated into AI-assisted workflows.
+
 Build
 -----
 From the repository root:
@@ -159,4 +167,4 @@ python3 scripts/embed_locales_to_go.py
 ```
 
 
-Most docs and the man pages are AI generated.
+Most unit tests, the docs and the man pages are AI generated.
