@@ -1,0 +1,9 @@
+{
+  "button": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "welcome": {
+    "message": "Welcome to the example locale"
+  }
+}
