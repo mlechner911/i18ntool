@@ -14,7 +14,7 @@ import (
 // main is the CLI entrypoint for i18n-manager.
 func main() {
     // parse optional global flags first (simple scan for --lang or -l)
-    lang := "de" // default language when not specified
+    lang := "en" // default language when not specified
     args := make([]string, 0, len(os.Args))
     args = append(args, os.Args[0])
     skipNext := false
@@ -60,7 +60,7 @@ func main() {
             // try top-level literal key
             if v, ok := translations[msg]; ok {
                 if s, ok := v.(string); ok {
-                    return s
+                    return simpletrans.Unescape(s)
                 }
             }
         }
@@ -85,6 +85,16 @@ func main() {
     command := args[1]
 
     switch command {
+    case "help":
+        // print basic usage and available commands
+        tprintln(translate("usage.general"))
+        tprintln(translate("usage.check"))
+        tprintln(translate("usage.sort"))
+        tprintln(translate("usage.unused"))
+        tprintln(translate("usage.add"))
+        tprintln(translate("usage.simple"))
+        os.Exit(0)
+
     case "check":
         if len(args) < 3 {
             tprintln(translate("usage.check"))
