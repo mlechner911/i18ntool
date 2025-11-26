@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// FindUnusedKeys scans project paths and returns keys that are not referenced.
 func (tm *TranslationManager) FindUnusedKeys(projectPaths []string) ([]string, error) {
     allKeys := tm.GetAllKeys()
     usedKeys := make(map[string]bool)

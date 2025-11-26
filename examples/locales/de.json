@@ -1,27 +1,27 @@
 {
   "common": {
+    "button": {
+      "cancel": "Abbrechen",
+      "save": "Speichern"
+    },
     "greeting": {
       "hello": "Hallo",
       "welcome": "Willkommen"
-    },
-    "button": {
-      "save": "Speichern",
-      "cancel": "Abbrechen"
-    }
-  },
-  "errors": {
-    "network": {
-      "timeout": "Anforderung abgelaufen",
-      "offline": "Sie sind offline"
     }
   },
   "dashboard": {
     "title": "Instrumententafel"
   },
+  "errors": {
+    "network": {
+      "offline": "Sie sind offline",
+      "timeout": "Anforderung abgelaufen"
+    }
+  },
   "user": {
     "profile": {
-      "name": "Name",
-      "age": "Alter"
+      "age": "Alter",
+      "name": "Name"
     }
   }
 }

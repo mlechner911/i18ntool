@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// SortAndSave sorts each language map and writes it back to disk (optionally creating backups).
 func (tm *TranslationManager) SortAndSave(createBackup bool) error {
     for lang, path := range tm.files {
         if createBackup {
@@ -37,6 +38,7 @@ func (tm *TranslationManager) SortAndSave(createBackup bool) error {
     return nil
 }
 
+// sortMap returns a recursively sorted copy of the provided map-like data.
 func (tm *TranslationManager) sortMap(data interface{}) interface{} {
     switch v := data.(type) {
     case map[string]interface{}:

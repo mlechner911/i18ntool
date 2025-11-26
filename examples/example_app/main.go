@@ -5,6 +5,7 @@ import (
 	// pretend i18n loader
 )
 
+// main is a small demo that prints referenced translation keys.
 func main() {
 	// This is a demo app that references some translation keys from the examples locales.
 	// It intentionally does not compile — it's just a usage demo.

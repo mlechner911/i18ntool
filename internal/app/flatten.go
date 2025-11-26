@@ -4,6 +4,7 @@ import (
 	"sort"
 )
 
+// flattenKeys flattens nested JSON-like structures into dot-separated keys.
 func (tm *TranslationManager) flattenKeys(prefix string, data interface{}) map[string]interface{} {
     result := make(map[string]interface{})
 
@@ -25,6 +26,7 @@ func (tm *TranslationManager) flattenKeys(prefix string, data interface{}) map[s
     return result
 }
 
+// GetAllKeys returns the set of all flattened keys across loaded languages.
 func (tm *TranslationManager) GetAllKeys() []string {
     keySet := make(map[string]bool)
 

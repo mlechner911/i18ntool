@@ -7,6 +7,7 @@ import (
 	"sort"
 )
 
+// NewTranslationManager loads the provided files and returns a TranslationManager.
 func NewTranslationManager(files map[string]string) (*TranslationManager, error) {
     tm := &TranslationManager{
         files:     files,

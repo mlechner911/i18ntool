@@ -1,27 +1,27 @@
 {
   "common": {
+    "button": {
+      "cancel": "Cancelar",
+      "save": "Guardar"
+    },
     "greeting": {
       "hello": "Hola",
       "welcome": "Bienvenido"
-    },
-    "button": {
-      "save": "Guardar",
-      "cancel": "Cancelar"
-    }
-  },
-  "errors": {
-    "network": {
-      "timeout": "Solicitud agotada",
-      "offline": "Estás desconectado"
     }
   },
   "dashboard": {
     "title": "Tablero"
   },
+  "errors": {
+    "network": {
+      "offline": "Estás desconectado",
+      "timeout": "Solicitud agotada"
+    }
+  },
   "user": {
     "profile": {
-      "name": "Nombre",
-      "age": "Edad"
+      "age": "Edad",
+      "name": "Nombre"
     }
   }
 }

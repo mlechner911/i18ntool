@@ -1,27 +1,27 @@
 {
   "common": {
+    "button": {
+      "cancel": "Cancel",
+      "save": "Save"
+    },
     "greeting": {
       "hello": "Hello",
       "welcome": "Welcome"
-    },
-    "button": {
-      "save": "Save",
-      "cancel": "Cancel"
-    }
-  },
-  "errors": {
-    "network": {
-      "timeout": "Request timed out",
-      "offline": "You are offline"
     }
   },
   "dashboard": {
     "title": "Dashboard"
   },
+  "errors": {
+    "network": {
+      "offline": "You are offline",
+      "timeout": "Request timed out"
+    }
+  },
   "user": {
     "profile": {
-      "name": "Name",
-      "age": "Age"
+      "age": "Age",
+      "name": "Name"
     }
   }
 }

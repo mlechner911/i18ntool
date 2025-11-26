@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// AddTranslation adds a new nested key to the specified JSON file (creates backup).
 func (tm *TranslationManager) AddTranslation(filePath, key, value string) error {
     content, err := os.ReadFile(filePath)
     if err != nil {
@@ -47,6 +48,7 @@ func (tm *TranslationManager) AddTranslation(filePath, key, value string) error 
     return nil
 }
 
+// keyExists returns true if the dotted key already exists in the provided data.
 func (tm *TranslationManager) keyExists(key string, data map[string]interface{}) bool {
     parts := strings.Split(key, ".")
     current := data
@@ -68,6 +70,7 @@ func (tm *TranslationManager) keyExists(key string, data map[string]interface{})
     return false
 }
 
+// addNestedKey inserts a nested dotted key into the provided map, creating intermediate objects.
 func (tm *TranslationManager) addNestedKey(data map[string]interface{}, key, value string) error {
     parts := strings.Split(key, ".")
     current := data

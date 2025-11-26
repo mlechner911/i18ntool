@@ -10,6 +10,7 @@ import (
 	"github.com/mlechner911/i18ntool/internal/app"
 )
 
+// main is the CLI entrypoint for i18n-manager.
 func main() {
     if len(os.Args) < 2 {
         fmt.Println("Usage: i18n-manager <command> [options]")
@@ -188,6 +189,7 @@ func main() {
 // buildFilesMapFromPaths accepts a slice of paths to JSON files and returns a map
 // of language -> path. It uses the same tolerant detection rules used in the
 // check command (2-letter codes, parent dir, basename, fallback to file-<n>).
+// buildFilesMapFromPaths derives language identifiers from paths and returns a map[lang]path.
 func buildFilesMapFromPaths(paths []string) map[string]string {
     files := make(map[string]string)
     used := make(map[string]bool)

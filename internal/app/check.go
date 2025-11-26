@@ -2,6 +2,7 @@ package app
 
 import "fmt"
 
+// CheckMissing returns a list of keys that have missing translations.
 func (tm *TranslationManager) CheckMissing() []MissingTranslation {
     allKeys := tm.GetAllKeys()
     missing := make([]MissingTranslation, 0)
