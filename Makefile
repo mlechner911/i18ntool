@@ -1,5 +1,7 @@
 .PHONY: build clean test test-check test-sort test-unused help precheckin examples-test examples-clean
 
+.DEFAULT_GOAL := build
+
 # Absolute paths (can be overridden). Default to repository root.
 BASE_DIR ?= $(CURDIR)
 TOOLS_DIR=$(BASE_DIR)
