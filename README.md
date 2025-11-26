@@ -105,4 +105,44 @@ go build ./...
 The runtime will prefer external JSON files when present, and fall back to the embedded
 map if a requested language file is missing.
 
+Install & Packaging
+-------------------
+You can install the built binary and manpage to your system or create a staged package.
+
+- Install the binary and manpage to `/usr/local` (default):
+
+```bash
+sudo make install
+```
+
+- Use `DESTDIR` for staged installs (useful for packaging):
+
+```bash
+make install DESTDIR=/tmp/package-root
+# binary will be at /tmp/package-root/usr/local/bin/i18n-manager
+```
+
+- Create a tarball package (stages a `DESTDIR` install into `dist/root`):
+
+```bash
+make package
+# -> dist/i18n-manager-YYYYMMDD-HHMMSS.tar.gz
+```
+
+- The package target also writes a SHA256 checksum next to the tarball.
+
+Manpage
+-------
+The manpage is provided at `man/man1/i18n-manager.1` and is installed by `make install`.
+
+Notes
+-----
+- `make build` automatically regenerates embedded translations with `make embed-locales`.
+- To regenerate embedded translations manually:
+
+```bash
+python3 scripts/embed_locales_to_go.py
+```
+
+
 If you want a different language-detection policy (strict two-letter codes, directory-only, or explicit `lang:filepath` syntax), I can add flags or stricter validation.
