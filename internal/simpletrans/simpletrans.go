@@ -4,6 +4,8 @@ import (
     "encoding/json"
     "fmt"
     "os"
+    "path/filepath"
+    "strings"
     "text/template"
 )
 
@@ -13,15 +15,56 @@ type Translations map[string]interface{}
 // LoadTranslations loads a JSON translation file from disk.
 func LoadTranslations(filename string) (Translations, error) {
     f, err := os.Open(filename)
+    if err == nil {
+        defer f.Close()
+        var t Translations
+        if err := json.NewDecoder(f).Decode(&t); err == nil {
+            return t, nil
+        }
+        // if decode failed, fallthrough to embedded fallback
+    }
+
+    // attempt to detect language code from filename and use embedded translations
+    base := filepath.Base(filename)
+    name := strings.TrimSuffix(base, filepath.Ext(base))
+    if m, ok := EmbeddedTranslations[name]; ok {
+        return buildTranslationsFromFlat(m), nil
+    }
+
     if err != nil {
         return nil, fmt.Errorf("open %s: %w", filename, err)
     }
-    defer f.Close()
-    var t Translations
-    if err := json.NewDecoder(f).Decode(&t); err != nil {
-        return nil, fmt.Errorf("decode %s: %w", filename, err)
+    return nil, fmt.Errorf("decode %s: failed to parse JSON", filename)
+}
+
+// buildTranslationsFromFlat converts a flat map (dotted keys) into a nested Translations
+// while also keeping the flat keys available at the top-level. This ensures both
+// dotted-key traversal and top-level lookups work.
+func buildTranslationsFromFlat(flat map[string]string) Translations {
+    out := make(Translations)
+    // keep flat entries
+    for k, v := range flat {
+        out[k] = v
     }
-    return t, nil
+    // also build nested maps for dotted keys
+    for k, v := range flat {
+        parts := splitKey(k)
+        cur := map[string]interface{}(out)
+        for i, p := range parts {
+            if i == len(parts)-1 {
+                cur[p] = v
+            } else {
+                if nxt, ok := cur[p].(map[string]interface{}); ok {
+                    cur = nxt
+                } else {
+                    nm := make(map[string]interface{})
+                    cur[p] = nm
+                    cur = nm
+                }
+            }
+        }
+    }
+    return out
 }
 
 // GetTranslation returns the string for key or the fallback if missing.
