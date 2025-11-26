@@ -80,3 +80,8 @@ examples-clean:
 	@echo "Removing backup files from examples/locales"
 	rm -f $(TOOLS_DIR)/examples/locales/*.backup.*
 	@echo "examples/locales cleaned"
+
+embed-locales:
+	@echo "Embedding example locales into Go source (internal/simpletrans/embedded_translations.go)"
+	python3 scripts/embed_locales_to_go.py
+	@echo "Embedded translations generated."

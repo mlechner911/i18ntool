@@ -78,4 +78,31 @@ Development notes
 - Code layout: CLI in `cmd/i18n-manager`, core logic in `internal/app` split among small files.
 - License: MIT — see `LICENSE`.
 
+Embedding translations into the binary
+-------------------------------------
+You can embed the example locale JSON files into Go source so translations are available
+even when external files are not present. This is handy for builds where you want a
+compiled fallback.
+
+- Generate embedded translations (writes `internal/simpletrans/embedded_translations.go`):
+
+```bash
+make embed-locales
+```
+
+- The generator script is `scripts/embed_locales_to_go.py` and can be run directly:
+
+```bash
+python3 scripts/embed_locales_to_go.py
+```
+
+- After generating, rebuild the project:
+
+```bash
+go build ./...
+```
+
+The runtime will prefer external JSON files when present, and fall back to the embedded
+map if a requested language file is missing.
+
 If you want a different language-detection policy (strict two-letter codes, directory-only, or explicit `lang:filepath` syntax), I can add flags or stricter validation.
