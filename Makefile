@@ -32,7 +32,8 @@ help:
 	@echo "  make precheckin   - Sort, check and validate real i18n files"
 	@echo "  make clean        - Remove binary and backup files"
 
-build:
+
+build: embed-locales
 	@echo "Building $(BINARY_NAME)..."
 	@cd $(TOOLS_DIR) && if [ ! -f "go.mod" ]; then \
 		echo "Initializing Go module..."; \
