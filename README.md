@@ -48,6 +48,14 @@ Commands
 ./i18n-manager add examples/locales/en.json some.section.key "My string"
 ```
 
+- simple: Load a single translation JSON and print a key's value (supports optional fallback).
+
+```bash
+# usage: i18n-manager simple <translation.json> <key> [<fallback>]
+./i18n-manager simple locales/en.json messages.welcome "[MISSING]"
+./i18n-manager simple locales/de.json messages.welcome "[MISSING]"
+```
+
 Examples
 --------
 - Example locales are in `examples/locales/` (en/de/es/fr). A small demo `examples/example_app` shows usage (it's only a demo).

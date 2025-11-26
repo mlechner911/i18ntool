@@ -7,10 +7,15 @@ TOOLS_DIR=$(BASE_DIR)
 BINARY_NAME=$(TOOLS_DIR)/i18n-manager
 SOURCE_DIR=$(TOOLS_DIR)/cmd/i18n-manager
 TEST_DIR=$(TOOLS_DIR)/testfiles
-PROJECT_SRC=$(BASE_DIR)/frontend/src
+PROJECT_SRC=$(BASE_DIR)/examples/example_app
+
+# If frontend/src doesn't exist in this workspace (examples/tests), fall back
+ifeq (,$(wildcard $(PROJECT_SRC)))
+PROJECT_SRC=$(TEST_DIR)
+endif
 
 # Real i18n files
-I18N_DIR=$(BASE_DIR)/frontend/src/i18n/locales
+I18N_DIR=$(BASE_DIR)/examples/locales
 I18N_EN=$(I18N_DIR)/en.json
 I18N_DE=$(I18N_DIR)/de.json
 I18N_ES=$(I18N_DIR)/es.json
@@ -48,10 +53,11 @@ test-sort: build
 
 test-unused: build
 	@echo "\n=== Testing: Find unused keys ==="
-	$(BINARY_NAME) unused $(TEST_DIR)/en.json $(TEST_DIR)/de.json $(TEST_DIR)/es.json $(PROJECT_SRC)
+	$(BINARY_NAME) unused $(TEST_DIR)/en.json $(TEST_DIR)/de.json $(TEST_DIR)/es.json -- $(PROJECT_SRC)
+
 
 precheckin: build
-	@echo "\n=== Pre-Checkin: Processing real i18n files ==="
+	@echo "\n=== Pre-Checkin: Processing example i18n files ==="
 	@echo "\n1. Sorting and backing up files..."
 	$(BINARY_NAME) sort $(I18N_EN) $(I18N_DE) $(I18N_ES)
 	@echo "\n2. Checking for missing translations..."

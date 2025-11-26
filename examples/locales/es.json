@@ -1,4 +1,35 @@
 {
+  "usage.general": "Uso: i18n-manager <comando> [opciones]",
+  "usage.check": "Uso: i18n-manager check <archivo1.json> <archivo2.json> [... ]",
+  "usage.sort": "Uso: i18n-manager sort <archivo1.json> <archivo2.json> [... ]",
+  "usage.unused": "Uso: i18n-manager unused <archivo1.json> <archivo2.json> -- <ruta-proyecto> [... ]",
+  "usage.add": "Uso: i18n-manager add <archivo.json> <clave> <valor>",
+  "usage.simple": "Uso: i18n-manager simple <translation.json> <clave> [<fallback>]",
+
+  "error.loading_translations": "Error al cargar traducciones: %v\\n",
+  "error.rendering_translation": "Error al renderizar la traducción: %v\\n",
+  "error.general": "Error: %v\\n",
+  "error.unknown_command": "Comando desconocido: %s\\n",
+
+  "check.all_complete": "¡Todas las traducciones están completas!",
+  "check.found_missing_count": "Encontradas %d traducciones faltantes:\\n\\n",
+  "check.key_prefix": "clave: %s: { ",
+  "check.lang_value": "%s: %s",
+  "check.key_suffix": " }",
+
+  "sort.success": "Traducciones ordenadas y guardadas.",
+
+  "unused.all_used": "¡Todas las claves están usadas!",
+  "unused.found_count": "Encontradas %d claves sin usar:\\n",
+  "unused.item": "  - %s\\n",
+
+  "add.added": "Traducción añadida",
+
+  "simple.output_prefix": "",
+
+  "unknown": "<desconocido>"
+}
+{
   "common": {
     "button": {
       "cancel": "Cancelar",

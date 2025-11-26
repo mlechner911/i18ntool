@@ -54,12 +54,20 @@ __pycache__/
 *.swo
 *.bak
 *.backup.*
+*.orig
+*.tmp
+*.temp
+.#*
+.~*
 
 # Logs
 .log
 
 # Example local backup files created by the tool
 /examples/locales/*.backup.*
+
+# Ignore any JSON backup files anywhere
+**/*.backup.*
 
 # Local built binary
 /i18n-manager

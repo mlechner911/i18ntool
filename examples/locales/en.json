@@ -1,27 +1,31 @@
 {
-  "common": {
-    "button": {
-      "cancel": "Cancel",
-      "save": "Save"
-    },
-    "greeting": {
-      "hello": "Hello",
-      "welcome": "Welcome"
-    }
-  },
-  "dashboard": {
-    "title": "Dashboard"
-  },
-  "errors": {
-    "network": {
-      "offline": "You are offline",
-      "timeout": "Request timed out"
-    }
-  },
-  "user": {
-    "profile": {
-      "age": "Age",
-      "name": "Name"
-    }
-  }
+  "usage.general": "Usage: i18n-manager <command> [options]",
+  "usage.check": "Usage: i18n-manager check <file1.json> <file2.json> [... ]",
+  "usage.sort": "Usage: i18n-manager sort <file1.json> <file2.json> [... ]",
+  "usage.unused": "Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [... ]",
+  "usage.add": "Usage: i18n-manager add <file.json> <key> <value>",
+  "usage.simple": "Usage: i18n-manager simple <translation.json> <key> [<fallback>]",
+
+  "error.loading_translations": "Error loading translations: %v\\n",
+  "error.rendering_translation": "Error rendering translation: %v\\n",
+  "error.general": "Error: %v\\n",
+  "error.unknown_command": "Unknown command: %s\\n",
+
+  "check.all_complete": "All translations complete!",
+  "check.found_missing_count": "Found %d missing translations:\\n\\n",
+  "check.key_prefix": "key: %s: { ",
+  "check.lang_value": "%s: %s",
+  "check.key_suffix": " }",
+
+  "sort.success": "Sorted and saved translations.",
+
+  "unused.all_used": "All keys are used!",
+  "unused.found_count": "Found %d unused keys:\\n",
+  "unused.item": "  - %s\\n",
+
+  "add.added": "Added translation",
+
+  "simple.output_prefix": "",
+
+  "unknown": "<unknown>"
 }
