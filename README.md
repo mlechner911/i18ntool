@@ -1,7 +1,6 @@
 # i18n-manager - Translation Helper
-
-Quick commands:
-# i18n-manager - Translation Helper
+Author: Michael Lechner
+Copyright: 2025
 
 Lightweight CLI for managing JSON translation files: checking missing translations, sorting and backing up, adding keys, and detecting unused keys.
 
@@ -115,6 +114,13 @@ You can install the built binary and manpage to your system or create a staged p
 sudo make install
 ```
 
+What `make install` installs
+----------------------------
+- **Binary:** `$(PREFIX)/bin/i18n-manager` (installed to `/usr/local/bin` by default)
+- **Manpage:** `$(PREFIX)/share/man/man1/i18n-manager.1` (installed to `/usr/local/share/man/man1` by default)
+
+- The `install` target does **not** copy the `Makefile`, `README.md`, `LICENSE` or other repository files. Use `DESTDIR`/`package` targets if you need to collect additional files into a staged archive.
+
 - Use `DESTDIR` for staged installs (useful for packaging):
 
 ```bash
@@ -130,6 +136,14 @@ make package
 ```
 
 - The package target also writes a SHA256 checksum next to the tarball.
+
+Default Make Behavior
+---------------------
+- The Makefile default goal is `build` to avoid accidental installs when running `make` with no arguments.  Use `make install` explicitly to install.
+
+Cleaning
+--------
+- `make clean` removes the built binary, example backup files and the `dist/` directory produced by `make package`.
 
 Manpage
 -------

@@ -108,6 +108,7 @@ clean:
 	@echo "Cleaning up..."
 	rm -f $(BINARY_NAME)
 	rm -f $(TEST_DIR)/*.backup.*
+	rm -rf dist
 	@echo "Clean complete!"
 
 examples-test: build

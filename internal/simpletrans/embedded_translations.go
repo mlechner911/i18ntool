@@ -42,6 +42,7 @@ var EmbeddedTranslations = map[string]map[string]string{
 		"check.key_prefix": "key: %s: { ",
 		"check.key_suffix": " }",
 		"check.lang_value": "%s: %s",
+		"common.greeting.hello": "Hello",
 		"error.general": "Error: %v\n",
 		"error.loading_translations": "Error loading translations: %v\n",
 		"error.rendering_translation": "Error rendering translation: %v\n",
@@ -91,6 +92,11 @@ var EmbeddedTranslations = map[string]map[string]string{
 		"usage.unused": "Uso: i18n-manager unused <archivo1.json> <archivo2.json> -- <ruta-proyecto> [... ]",
 		"user.profile.age": "Edad",
 		"user.profile.name": "Nombre",
+	},
+	"example_new": map[string]string{
+		"button.cancel": "Cancel",
+		"button.save": "Save",
+		"welcome.message": "Welcome to the example locale",
 	},
 	"fr": map[string]string{
 		"common.button.cancel": "Annuler",

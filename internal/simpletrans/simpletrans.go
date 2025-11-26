@@ -1,12 +1,13 @@
 package simpletrans
 
 import (
-    "encoding/json"
-    "fmt"
-    "os"
-    "path/filepath"
-    "strings"
-    "text/template"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"strconv"
+	"strings"
+	"text/template"
 )
 
 // Translations maps keys to string or nested maps.
@@ -88,14 +89,18 @@ func GetTranslation(t Translations, key string, data map[string]interface{}, fal
         return fallback, nil
     }
     if s, ok := cur.(string); ok {
-        if data == nil {
-            return s, nil
+        // perform template rendering if needed
+        var err error
+        if data != nil {
+            var out string
+            out, err = render(s, data)
+            if err == nil {
+                s = out
+            }
         }
-        out, err := render(s, data)
-        if err != nil {
-            return s, nil
-        }
-        return out, nil
+        // unescape common escaped sequences like \n, \t so output contains real newlines
+        s = unescapeCommon(s)
+        return s, nil
     }
     return fallback, nil
 }
@@ -148,4 +153,49 @@ func mapInterface(t Translations) map[string]interface{} {
         m[k] = v
     }
     return m
+}
+
+// unescapeCommon converts sequences like "\n" into real newlines.
+// It tries to use strconv.Unquote on a quoted string; if that fails
+// it falls back to replacing common escapes.
+func unescapeCommon(s string) string {
+    // Quick path: if the string contains backslash escapes, try Unquote
+    if !strings.Contains(s, "\\") {
+        return s
+    }
+    // strconv.Unquote expects a quoted string; try it first
+    if q, err := strconv.Unquote("\"" + s + "\""); err == nil {
+        return q
+    }
+
+    // Manual fallback: handle common escapes and unicode sequences
+    // Replace escaped backslash first
+    s = strings.ReplaceAll(s, "\\\\", "\\")
+    s = strings.ReplaceAll(s, "\\n", "\n")
+    s = strings.ReplaceAll(s, "\\t", "\t")
+    s = strings.ReplaceAll(s, "\\r", "\r")
+
+    // Handle \uXXXX sequences
+    var b strings.Builder
+    for i := 0; i < len(s); i++ {
+        if s[i] == '\\' && i+5 < len(s) && s[i+1] == 'u' {
+            hex := s[i+2 : i+6]
+            // parse hex
+            var r rune
+            if n, err := strconv.ParseInt(hex, 16, 32); err == nil {
+                r = rune(n)
+                b.WriteRune(r)
+                i += 5 // skip \uXXXX
+                continue
+            }
+        }
+        b.WriteByte(s[i])
+    }
+    return b.String()
+}
+
+// Unescape exposes unescapeCommon for callers that need to normalize
+// translation strings (turning "\\n" into a newline, etc.).
+func Unescape(s string) string {
+    return unescapeCommon(s)
 }

@@ -1,31 +1,29 @@
 {
-  "usage.general": "Usage: i18n-manager <command> [options]",
-  "usage.check": "Usage: i18n-manager check <file1.json> <file2.json> [... ]",
-  "usage.sort": "Usage: i18n-manager sort <file1.json> <file2.json> [... ]",
-  "usage.unused": "Usage: i18n-manager unused <file1.json> <file2.json> -- <project-path> [... ]",
-  "usage.add": "Usage: i18n-manager add <file.json> <key> <value>",
-  "usage.simple": "Usage: i18n-manager simple <translation.json> <key> [<fallback>]",
-
-  "error.loading_translations": "Error loading translations: %v\\n",
-  "error.rendering_translation": "Error rendering translation: %v\\n",
-  "error.general": "Error: %v\\n",
-  "error.unknown_command": "Unknown command: %s\\n",
-
+  "add.added": "Added translation",
   "check.all_complete": "All translations complete!",
   "check.found_missing_count": "Found %d missing translations:\\n\\n",
   "check.key_prefix": "key: %s: { ",
-  "check.lang_value": "%s: %s",
   "check.key_suffix": " }",
-
+  "check.lang_value": "%s: %s",
+  "common": {
+    "greeting": {
+      "hello": "Hello"
+    }
+  },
+  "error.general": "Error: %v\\n",
+  "error.loading_translations": "Error loading translations: %v\\n",
+  "error.rendering_translation": "Error rendering translation: %v\\n",
+  "error.unknown_command": "Unknown command: %s\\n",
+  "simple.output_prefix": "",
   "sort.success": "Sorted and saved translations.",
-
+  "unknown": "\u003cunknown\u003e",
   "unused.all_used": "All keys are used!",
   "unused.found_count": "Found %d unused keys:\\n",
   "unused.item": "  - %s\\n",
-
-  "add.added": "Added translation",
-
-  "simple.output_prefix": "",
-
-  "unknown": "<unknown>"
+  "usage.add": "Usage: i18n-manager add \u003cfile.json\u003e \u003ckey\u003e \u003cvalue\u003e",
+  "usage.check": "Usage: i18n-manager check \u003cfile1.json\u003e \u003cfile2.json\u003e [... ]",
+  "usage.general": "Usage: i18n-manager \u003ccommand\u003e [options]",
+  "usage.simple": "Usage: i18n-manager simple \u003ctranslation.json\u003e \u003ckey\u003e [\u003cfallback\u003e]",
+  "usage.sort": "Usage: i18n-manager sort \u003cfile1.json\u003e \u003cfile2.json\u003e [... ]",
+  "usage.unused": "Usage: i18n-manager unused \u003cfile1.json\u003e \u003cfile2.json\u003e -- \u003cproject-path\u003e [... ]"
 }
