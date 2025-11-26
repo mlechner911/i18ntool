@@ -42,6 +42,14 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/i18n-manager.1
 	@echo "Uninstall complete."
 
+package: build
+	@echo "Creating staged package in ./dist"
+	@rm -rf dist
+	@mkdir -p dist/root
+	make install DESTDIR=$(CURDIR)/dist/root PREFIX=$(PREFIX)
+	cd dist && tar czf i18n-manager-$(shell date +%Y%m%d-%H%M%S).tar.gz root
+	@echo "Package created under dist/"
+
 help:
 	@echo "Available targets:"
 	@echo "  make build        - Build the Go binary"
