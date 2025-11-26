@@ -47,8 +47,9 @@ package: build
 	@rm -rf dist
 	@mkdir -p dist/root
 	make install DESTDIR=$(CURDIR)/dist/root PREFIX=$(PREFIX)
-	cd dist && tar czf i18n-manager-$(shell date +%Y%m%d-%H%M%S).tar.gz root
-	@echo "Package created under dist/"
+	cd dist && TARFILE=i18n-manager-$(shell date +%Y%m%d-%H%M%S).tar.gz && tar czf $$TARFILE root && \
+		if command -v sha256sum >/dev/null 2>&1; then sha256sum $$TARFILE > $$TARFILE.sha256; else shasum -a 256 $$TARFILE > $$TARFILE.sha256; fi
+	@echo "Package created under dist/ (with SHA256 checksum)"
 
 help:
 	@echo "Available targets:"
